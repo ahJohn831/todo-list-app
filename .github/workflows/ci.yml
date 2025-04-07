@@ -1,12 +1,9 @@
-name: Build Pipeline
+name: Basic Build Pipeline
 
 on:
   push:
     branches:
       - main  # Trigger the pipeline when there is a push to the 'main' branch
-  pull_request:
-    branches:
-      - main  # Trigger the pipeline for pull requests targeting 'main'
 
 jobs:
   build:
@@ -14,12 +11,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2  # This checks out your code
 
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
-        java-version: '11'
+        java-version: '11'  # Make sure the Java version is correct for your project
 
-    - name: Build with Maven
-      run: mvn clean install -DskipTests # Optional: add more arguments here based on your needs
+    - name: Run Maven Build
+      run: mvn clean verify  # Just 'verify' instead of 'install' to check if everything's building okay
