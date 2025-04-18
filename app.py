@@ -5,8 +5,8 @@ todos = []
 
 @app.route("/")
 def index():
-    
-    return render_template("index.html", todos=todoz)  
+    return render_template("index.html", todos=todos)
+
 @app.route("/add", methods=["POST"])
 def add():
     todo = request.form.get("todo")
