@@ -39,11 +39,11 @@ jobs:
       - name: Set up Render CLI
         run: |
           curl -fsSL https://cdn.render.com/render-cli/install.sh | bash
-          echo "${{rnd_PX4vYFOuiiEEuLIdKEUzq8FNe0n2}}" | render login
+          echo "${{ secrets.rnd_PX4vYFOuiiEEuLIdKEUzq8FNe0n2 }}" | render login
 
       - name: Deploy to Render
         run: |
-          git remote add render "${{rnd_PX4vYFOuiiEEuLIdKEUzq8FNe0n2}}"
+          git remote add render "${{ secrets.rnd_PX4vYFOuiiEEuLIdKEUzq8FNe0n2 }}"
           git push render main  # Push to Render to deploy the code
 
       - name: Notify deployment status (optional)
