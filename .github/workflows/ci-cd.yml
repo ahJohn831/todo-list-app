@@ -27,3 +27,24 @@ jobs:
       - name: Run tests
         run: |
           pytest --maxfail=1 --disable-warnings -q
+
+  deploy:
+    needs: test  # Only run deploy if the test job succeeds
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Render CLI
+        run: |
+          curl -fsSL https://cdn.render.com/render-cli/install.sh | bash
+          echo "${{ secrets.RENDER_API_KEY }}" | render login
+
+      - name: Deploy to Render
+        run: |
+          git remote add render "${{ secrets.RENDER_SERVICE_URL }}"
+          git push render main  # Push to Render to deploy the code
+
+      - name: Notify deployment status (optional)
+        run: echo "Deployed to Render successfully!"

@@ -14,7 +14,6 @@ def add():
         todos.append(todo)
     return redirect("/")
 
-# 🟩 PASTE THIS LAST PART AT THE END:
 import os
 
 if __name__ == "__main__":
