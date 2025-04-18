@@ -27,23 +27,3 @@ jobs:
       - name: Run tests
         run: |
           pytest --maxfail=1 --disable-warnings -q
-
-  deploy:
-    needs: test  # Only run deploy if the test job succeeds
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Render CLI
-        uses: render-examples/render-cli-action@v1
-        with:
-          render_api_key: ${{ secrets.rnd_PX4vYFOuiiEEuLIdKEUzq8FNe0n2 }}
-
-      - name: Deploy to Render
-        run: |
-          render deploy --service your-service-name
-
-      - name: Notify deployment status (optional)
-        run: echo "Deployed to Render successfully!"
