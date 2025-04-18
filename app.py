@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 
-app = Flask(name)
+app = Flask(__name__)  
 todos = []
 
 @app.route('/')
@@ -14,5 +14,5 @@ def add():
         todos.append(todo)
     return redirect('/')
 
-if name == 'main':
+if __name__ == '__main__':  
     app.run(debug=True)
