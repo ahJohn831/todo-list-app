@@ -38,6 +38,6 @@ jobs:
 
       - name: Trigger Render Deployment
         run: |
-          curl "$https://api.render.com/deploy/srv-d01632juibrs73f2af70?key=RLNVN-YX3KQ"
+          curl "$RENDER_DEPLOY_HOOK"
         env:
-          RENDER_DEPLOY_HOOK: ${{ secrets.https://api.render.com/deploy/srv-d01632juibrs73f2af70?key=RLNVN-YX3KQ }}
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
