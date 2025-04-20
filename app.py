@@ -11,7 +11,13 @@ def index():
 def add():
     todo = request.form.get("todo")
     if todo:
-        todos.append(todo)
+        todos.append({"task": todo, "done": False})
+    return redirect("/")
+
+@app.route("/mark_done/<int:index>")
+def mark_done(index):
+    if 0 <= index < len(todos):
+        todos[index]["done"] = True
     return redirect("/")
 
 import os

@@ -1,19 +1,27 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>To-Do List</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
 </head>
 <body>
-    <h1>To-Do List</h1>
-    <form action="/add" method="POST">
-        <input name="todo" required>
-        <button type="submit">Add</button>
+    <h1>Todo List</h1>
+    <form method="POST" action="/add">
+        <input type="text" name="todo" placeholder="Enter a new task">
+        <button type="submit">Add Task</button>
     </form>
-    <h2>All Reminders</h2>
+
     <ul>
-        {% for item in todos %}
-            <li>{{ item }}</li>
+        {% for todo in todos %}
+            <li style="text-decoration: {% if todo.done %} line-through {% endif %}">
+                {{ todo.task }}
+                {% if not todo.done %}
+                    <a href="/mark_done/{{ loop.index0 }}">Mark as Done</a>
+                {% else %}
+                    (Completed)
+                {% endif %}
+            </li>
         {% endfor %}
     </ul>
 </body>
