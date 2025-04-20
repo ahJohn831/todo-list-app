@@ -4,90 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 40px auto;
-            padding: 0 20px;
-            background-color: #fafafa;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        form {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        input[type="text"] {
-            flex: 1;
-            padding: 8px;
-            font-size: 16px;
-        }
-
-        button {
-            padding: 8px 12px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        ul {
-            padding: 0;
-            list-style: none;
-        }
-
-        li {
-            background: #fff;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .done {
-            text-decoration: line-through;
-            color: #888;
-        }
-
-        .mark-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            text-align: center;
-            line-height: 28px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <h1>Todo List</h1>
     <form method="POST" action="/add">
-        <input type="text" name="todo" placeholder="Enter a new task" required>
-        <button type="submit">Add</button>
+        <input type="text" name="todo" placeholder="Enter a new task">
+        <button type="submit">Add Task</button>
     </form>
 
     <ul>
         {% for todo in todos %}
-            <li>
-                <span class="{% if todo.done %}done{% endif %}">{{ todo.task }}</span>
+            <li style="text-decoration: {% if todo.done %} line-through {% endif %}">
+                {{ todo.task }}
                 {% if not todo.done %}
-                    <a href="/mark_done/{{ loop.index0 }}" class="mark-btn">✓</a>
+                <a href="/mark_done/{{ loop.index0 }}"
+                style="display: inline-block; width: 30px; height: 30px; border-radius: 50%; background-color: {% if todo.done %}#4CAF50{% else %}#ccc{% endif %}; text-align: center; line-height: 30px; color: white; text-decoration: none; font-weight: bold;">
+                ✓
+             </a>
+             
                 {% else %}
-                    <span style="font-size: 12px; color: #777;">Done</span>
+                    (Completed)
                 {% endif %}
             </li>
         {% endfor %}
