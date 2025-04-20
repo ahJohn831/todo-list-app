@@ -17,7 +17,11 @@
             <li style="text-decoration: {% if todo.done %} line-through {% endif %}">
                 {{ todo.task }}
                 {% if not todo.done %}
-                    <a href="/mark_done/{{ loop.index0 }}">Mark as Done</a>
+                <a href="/mark_done/{{ loop.index0 }}"
+                style="display: inline-block; width: 30px; height: 30px; border-radius: 50%; background-color: {% if todo.done %}#4CAF50{% else %}#ccc{% endif %}; text-align: center; line-height: 30px; color: white; text-decoration: none; font-weight: bold;">
+                ✓
+             </a>
+             
                 {% else %}
                     (Completed)
                 {% endif %}
