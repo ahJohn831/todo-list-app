@@ -31,13 +31,13 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Simulate Deployment
+      - name: Trigger Render Deployment
         run: |
-          echo "✅ All tests passed."
-          echo "🚀 Simulating deployment to Render..."
-          echo "🛠️ Auto-deployment on Render will now take over."
-
+          curl "$https://api.render.com/deploy/srv-d01632juibrs73f2af70?key=RLNVN-YX3KQ"
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.https://api.render.com/deploy/srv-d01632juibrs73f2af70?key=RLNVN-YX3KQ }}
